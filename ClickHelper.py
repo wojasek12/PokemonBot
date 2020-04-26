@@ -15,6 +15,15 @@ class ClickHelper:
         self.driver.find_element_by_xpath("//input[@value='Search']").click()
         print("zmiana")
 
-    # def list_of_cards(self):
-    #     number_of_cards = driver.
-    #     pokemon_list = driver.find_elements_by_xpath("//div[@class='table-body']/div/div[4]/div[1]/div[1]/a")
+    def list_of_pokemons_from_expansion(self):
+        number_of_cards = int(self.driver.find_element_by_xpath("/html/body/main/section/div[2]/div[1]").text[:-5])
+        final_pokemon_list = []
+        while True:
+            temp_pokemon_list = [pokemon.text for pokemon in self.driver.find_elements_by_xpath(
+                "//div[@class='table-body']/div/div[4]/div[1]/div[1]/a")]
+            final_pokemon_list.extend(temp_pokemon_list)
+            if len(final_pokemon_list) != number_of_cards:
+                self.driver.find_element_by_xpath("//a[@aria-label='Next page']").click()
+            else:
+                break
+        return final_pokemon_list
