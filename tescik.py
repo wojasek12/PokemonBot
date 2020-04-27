@@ -18,6 +18,7 @@ for elm in pokemon_list:
             break
     table_of_offers = driver.find_elements_by_xpath("//div[@class='table-body']/div")
     for elm in table_of_offers:
-        print([elm.text])
+        seller = elm.find_element_by_xpath("div/div/div/span/span/span[3]/a").text
+        print(seller)
 
 driver.close()
