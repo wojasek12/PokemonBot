@@ -27,3 +27,16 @@ class ClickHelper:
             else:
                 break
         return final_pokemon_list
+
+    def remove_spaces_and_brackets_from_names(self, final_pokemon_list):
+        pokemon_temp_list = []
+        for pokemon in final_pokemon_list:
+            if ' ' in pokemon:
+                pokemon = pokemon.replace(' ', '-')
+                if '(' in pokemon:
+                    pokemon = pokemon.replace(')', '')
+                    pokemon = pokemon.replace('(', '')
+            pokemon_temp_list.append(pokemon)
+        return final_pokemon_list
+
+    def seller_pokemons_price_dict(self, final_pokemon_list):

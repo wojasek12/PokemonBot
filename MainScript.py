@@ -10,6 +10,8 @@ clickHelper = ClickHelper(driver)
 
 clickHelper.click_singles_button()
 clickHelper.search_expansion('Fossil')
-list = clickHelper.list_of_pokemons_from_expansion()
-print(list)
+list_of_pokemons = clickHelper.list_of_pokemons_from_expansion()
+list_of_pokemons = clickHelper.remove_spaces_and_brackets_from_names(list_of_pokemons)
+seller_pokemon_price_dict = clickHelper.seller_pokemons_price_dict()
+
 driver.close()
