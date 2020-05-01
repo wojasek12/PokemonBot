@@ -67,7 +67,7 @@ class ClickHelper:
                     price = offer.find_element_by_xpath(
                         ".//div[@class='price-container d-none d-md-flex justify-content-end']/div/div/span").text
                     pokemon_price_dict = {pokemon: price}
-                    seller_pokemon_price_dict[seller] = pokemon_price_dict
+                    seller_pokemon_price_dict.setdefault(seller, []).append(pokemon_price_dict)
 
         return seller_pokemon_price_dict
 
