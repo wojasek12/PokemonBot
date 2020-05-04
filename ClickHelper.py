@@ -38,6 +38,12 @@ class ClickHelper:
     def adjust_names_to_put_them_into_url(self, final_pokemon_list):
         pokemon_temp_list = []
         for pokemon in final_pokemon_list:
+            if '[' and ']' and '|' and 'V.' not in pokemon:
+                pokemon = pokemon.replace('[', '')
+                pokemon = pokemon.replace(']', '')
+                pokemon = pokemon.replace('|', '')
+                pokemon = pokemon.replace('  ', '-')
+                pokemon = pokemon.replace(' ', '-')
             if 'V.' in pokemon:
                 pokemon = pokemon.replace('.', '-')
             if '[' in pokemon:
@@ -45,7 +51,7 @@ class ClickHelper:
                 if re.match(".*\-$", pokemon):
                     pokemon = pokemon[:-1]
             if '!' in pokemon:
-                pokemon = pokemon.replace('!', '')
+                pokemon = pokemon.replace('!', '-')
             if "'" in pokemon:
                 pokemon = pokemon.replace("'", '-')
             if ' ' in pokemon:
@@ -55,8 +61,8 @@ class ClickHelper:
                 pokemon = pokemon.replace('(', '')
 
             pokemon_temp_list.append(pokemon)
-
-        return final_pokemon_list
+        print(pokemon_temp_list)
+        return pokemon_temp_list
 
     def seller_pokemons_price_dict(self, final_pokemon_list):
         seller_pokemon_price_dict = {}
