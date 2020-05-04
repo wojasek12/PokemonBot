@@ -1,4 +1,5 @@
 import time
+import re
 from selenium.common.exceptions import ElementNotInteractableException, ElementClickInterceptedException
 
 
@@ -27,21 +28,34 @@ class ClickHelper:
             temp_pokemon_list = [pokemon.text for pokemon in self.driver.find_elements_by_xpath(
                 "//div[@class='table-body']/div/div[4]/div[1]/div[1]/a")]
             final_pokemon_list.extend(temp_pokemon_list)
+            time.sleep(1)
             if len(final_pokemon_list) != number_of_cards:
                 self.driver.find_element_by_xpath("//a[@aria-label='Next page']").click()
             else:
                 break
         return final_pokemon_list
 
-    def remove_spaces_and_brackets_from_names(self, final_pokemon_list):
+    def adjust_names_to_put_them_into_url(self, final_pokemon_list):
         pokemon_temp_list = []
         for pokemon in final_pokemon_list:
+            if 'V.' in pokemon:
+                pokemon = pokemon.replace('.', '-')
+            if '[' in pokemon:
+                pokemon = re.sub("\s\[.*?\]", '', pokemon)
+                if re.match(".*\-$", pokemon):
+                    pokemon = pokemon[:-1]
+            if '!' in pokemon:
+                pokemon = pokemon.replace('!', '')
+            if "'" in pokemon:
+                pokemon = pokemon.replace("'", '-')
             if ' ' in pokemon:
                 pokemon = pokemon.replace(' ', '-')
-                if '(' in pokemon:
-                    pokemon = pokemon.replace(')', '')
-                    pokemon = pokemon.replace('(', '')
+            if '(' in pokemon:
+                pokemon = pokemon.replace(')', '')
+                pokemon = pokemon.replace('(', '')
+
             pokemon_temp_list.append(pokemon)
+
         return final_pokemon_list
 
     def seller_pokemons_price_dict(self, final_pokemon_list):

@@ -1,31 +1,63 @@
 from selenium import webdriver
 import time
+import re
 import json
-
+from AlgoHelper import AlgoHelper
 from selenium.common.exceptions import ElementNotInteractableException
 # driver = webdriver.Chrome()
 # pokemon_list = ['Dragonite-Holo', 'Ekans', 'Grimer']
 # #pokemon_list = ['Dragonite-Holo']
 # base_url = "https://www.cardmarket.com/en/Pokemon/Products/Singles/Fossil/"
-dict = json.load(open( "dict.txt", 'r' ) )
-# dict_dodatek = {'ditto': '2'}
-# super_dict = {'maciek': [{'dragonite': '2,72'}], 'karol': {'ditto': '2'}, 'Natalka': {'Czarizard': '100'}}
-# imie1 = 'maciek'
-# imie2 = 'karol'
-# imie3 = 'Bogus'
-# imie4 = 'Natalka'
-# imie5 = 'Natalka1'
-# pokemon1 = 'dragonite'
-# pokemon2 = 'ditto'
-# pokemon3 = 'Czarizard'
-# price1 = '2,72'
-# price2 = '2'
-# price3 = '100'
-#super_dict.setdefault(imie1, []).append(dict_dodatek)
-# print(super_dict)
-# print(super_dict.setdefault(imie5, []).append(dict_dodatek))
-# print(super_dict)
-print(dict)
+#dict = json.load(open("fossil.txt", 'r'))
+#algoHelper = AlgoHelper()
+pokemons = ['Dark Raichu [Surprise Thunder]', 'Dark Blastoise [Hydrocannon | Rocket Tackle] (V-1)']
+for pokemon in pokemons:
+    if '[' in pokemon:
+        print(pokemon)
+        pokemon = re.sub("\s\[.*?\]", '', pokemon)#.replace(' ', '')
+        print(pokemon)
+        if re.match(".*\-$", pokemon):
+            print(pokemon)
+            pokemon = pokemon[:-1]
+    print(pokemon)
+#result = re.match(".*\-", string)
+#result = re.findall(re.compile(".*?\[(.*?)\]"), string)
+
+#print(algoHelper.sort_users_from_dict(dict))
+
+#print(list(dict.keys()))
+#def find_three_users_with_biggest_amount_of_cards():
+#keys_list = list(dict.keys())
+
+#biggest_amount_of_card_user = keys_list[0]
+#print("Na poczatku najwiecej ma " + biggest_amount_of_card_user)
+
+#top_users_list = ['Cardlord-234', 'Alexlfernando', 'niorantes', 'CardsMania', 'Games-Island']
+
+# for user in top_users_list:
+#     print(user + ' ' + str(len(dict[user])))
+
+
+
+# for username in keys_list:
+#     if len(dict[username]) > len(dict[biggest_amount_of_card_user]):
+#         biggest_amount_of_card_user = username
+#         print("Teraz najwiecej ma: " + username)
+#     elif len(dict[username]) == len(dict[biggest_amount_of_card_user]):
+#         print("No tyle samo ma waraiat: " + username)
+
+
+
+
+
+
+
+#print(next(iter(dict)))
+#first_most_card_hold_user
+# for elm in dict:
+#     print(len(dict[elm]))
+
+#print(dict)
 print("dupa")
 #super_dict[imie4].append(dict_dodatek)
 
