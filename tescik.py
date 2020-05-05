@@ -10,14 +10,16 @@ from selenium.common.exceptions import ElementNotInteractableException
 # base_url = "https://www.cardmarket.com/en/Pokemon/Products/Singles/Fossil/"
 #dict = json.load(open("fossil.txt", 'r'))
 #algoHelper = AlgoHelper()
-pokemons = ['Abra [Vanish | Psyshock]']
+pokemons = ['Nidoran ♀ [Fury Swipes | Call for Family]']
 for pokemon in pokemons:
-    if '[' and ']' and '|' and 'V.' not in pokemon:
+    if ('[' and ']' and '|') in pokemon and 'V.' not in pokemon:
         pokemon = pokemon.replace('[', '')
         pokemon = pokemon.replace(']', '')
         pokemon = pokemon.replace('|', '')
         pokemon = pokemon.replace('  ', '-')
         pokemon = pokemon.replace(' ', '-')
+    if '♀' in pokemon:
+        pokemon = pokemon.replace('♀', '')
     print(pokemon)
 #result = re.match(".*\-", string)
 #result = re.findall(re.compile(".*?\[(.*?)\]"), string)

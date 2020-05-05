@@ -38,7 +38,7 @@ class ClickHelper:
     def adjust_names_to_put_them_into_url(self, final_pokemon_list):
         pokemon_temp_list = []
         for pokemon in final_pokemon_list:
-            if '[' and ']' and '|' and 'V.' not in pokemon:
+            if ('[' and ']' and '|') in pokemon and 'V.' not in pokemon:
                 pokemon = pokemon.replace('[', '')
                 pokemon = pokemon.replace(']', '')
                 pokemon = pokemon.replace('|', '')
@@ -59,6 +59,14 @@ class ClickHelper:
             if '(' in pokemon:
                 pokemon = pokemon.replace(')', '')
                 pokemon = pokemon.replace('(', '')
+            if pokemon == 'Dark-Blastoise-V-1':
+                pokemon = 'Dark-Blastoise'
+            if '--' in pokemon:
+                pokemon = pokemon.replace('--', '-')
+            if pokemon == 'Rocket-s-Sneak-Attack-Holo':
+                pokemon = 'Rockets-Sneak-Attack-Holo'
+            if '♀' in pokemon:
+                pokemon = pokemon.replace('♀', '')
 
             pokemon_temp_list.append(pokemon)
         print(pokemon_temp_list)
