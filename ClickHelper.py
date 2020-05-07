@@ -61,12 +61,15 @@ class ClickHelper:
                 pokemon = pokemon.replace('(', '')
             if pokemon == 'Dark-Blastoise-V-1':
                 pokemon = 'Dark-Blastoise'
+            if '♀' in pokemon:
+                pokemon = pokemon.replace('♀', '')
+            if '.' in pokemon:
+                pokemon = pokemon.replace('.','')
             if '--' in pokemon:
                 pokemon = pokemon.replace('--', '-')
             if pokemon == 'Rocket-s-Sneak-Attack-Holo':
                 pokemon = 'Rockets-Sneak-Attack-Holo'
-            if '♀' in pokemon:
-                pokemon = pokemon.replace('♀', '')
+
 
             pokemon_temp_list.append(pokemon)
         print(pokemon_temp_list)
