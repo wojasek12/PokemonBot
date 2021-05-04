@@ -6,12 +6,16 @@ from AlgoHelper import AlgoHelper
 from collections import Counter
 
 
-
+#wielki slownik sprzedawcow w formie {sprzedawca1:[{pokemon1: cena}, {pokemon2:cena},.....], sprzedawca2......}
 userdict = json.load(open("urlsdict2.txt", 'r'))
+
 pokemon_to_url = json.load(open("pokemon_name_to_url.txt", 'r'))
+
+#lista wszystkich pokemonow z danego setu
 pokemon_names_list = [list(pokemon)[0] for pokemon in pokemon_to_url]
 pokemon_to_users_list = {}
 
+#i tutaj sobie ten poczatkowy userdict odwracam, tak ze zamiast sprzedawca:pokemony, mam pokemona i wszystkich sprzedawcow co go maja
 for pokemon in pokemon_names_list:
     print(pokemon)
     for user in userdict:
