@@ -13,17 +13,20 @@ driver.get("https://www.cardmarket.com/en/Pokemon")
 clickHelper = ClickHelper(driver)
 clickHelper.click_singles_button()
 clickHelper.search_expansion('Team-Rocket')
-list_of_pokemons = clickHelper.get_urls_for_cards_from_given_expansion()
-print(list_of_pokemons)
-# list_of_pokemons = clickHelper.adjust_names_to_put_them_into_url(list_of_pokemons)
-# seller_pokemon_price_dict = clickHelper.seller_pokemons_price_dict(list_of_pokemons)
+list_of_pokemons_urls = clickHelper.get_urls_for_cards_from_given_expansion()
+print(len(list_of_pokemons_urls))
+print(list_of_pokemons_urls)
+seller_pokemon_price_dict, pokemon_name_to_url = clickHelper.get_seller_pokemons_price_dict(list_of_pokemons_urls)
+print(seller_pokemon_price_dict)
+print(pokemon_name_to_url)
 # print(seller_pokemon_price_dict)
+# Serialize data into file:
+json.dump( seller_pokemon_price_dict, open( "urlsdict2.txt", 'w' ) )
+json.dump( pokemon_name_to_url, open("pokemon_name_to_url.txt", 'w'))
 
-
-#driver.close()
+driver.close()
 print("--- %s seconds ---" % (time.time() - start_time))
 
-# Serialize data into file:
-#json.dump( seller_pokemon_price_dict, open( "jungle.txt", 'w' ) )
+
 
 #display.stop()
