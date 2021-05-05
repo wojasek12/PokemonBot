@@ -1,5 +1,6 @@
 import time
 import re
+import AlgoHelper
 from selenium.common.exceptions import ElementNotInteractableException, ElementClickInterceptedException,\
     NoSuchElementException
 
@@ -93,6 +94,7 @@ class ClickHelper:
                     pokemon_price_dict = {pokemon_name: price}
                     seller_pokemon_price_dict.setdefault(seller, []).append(pokemon_price_dict)
 
+        seller_pokemon_price_dict = AlgoHelper().change_list_of_tuples_to_dict_of_dicts(seller_pokemon_price_dict)
         return seller_pokemon_price_dict, pokemon_name_to_url_list
 
     def list_of_pokemons_from_expansion(self):

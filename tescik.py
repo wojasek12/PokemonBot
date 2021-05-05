@@ -11,7 +11,7 @@ from itertools import combinations
 userdict = json.load(open("urlsdict2.txt", 'r'))
 #zmieniam na troche bardziej sympatyczny format
 userdict2 = {}
-
+#
 for elm in userdict:
     for elm2 in userdict[elm]:
         if elm not in userdict2.keys():
@@ -25,62 +25,69 @@ for user in userdict2:
 pokemon_to_url = json.load(open("pokemon_name_to_url.txt", 'r'))
 
 #FINALNA FUNKCJA ODSIEWAJACA
-# userdict3 = userdict2.copy()
-# cost_sum_user2 = 15
-# cost_sum_user1 = 15
-# for user1 in userdict2:
-#     print(user1)
-#     for user2 in userdict2:
-#         print(user2)
-#         if user1 != user2:
-#             if len(userdict2[user2]) < len(userdict2[user1]):
-#                 if len([
-#                     item for item in list(userdict2[user1].keys())
-#                     if item not in list(userdict2[user2].keys())]) == (len(userdict2[user1]) - len(
-#                     userdict2[user2])):
-#                     for key in list(userdict2[user2].keys()):
-#                         cost_sum_user2 = cost_sum_user2 + userdict2[user2][key]
-#                     for key in list(userdict2[user1].keys()):
-#                         cost_sum_user1 = cost_sum_user1 + userdict2[user1][key]
-#                         print(str(cost_sum_user2) + "+++++" + str(cost_sum_user1))
-#                     if cost_sum_user2 > cost_sum_user1:
-#                         print("Deleted" + user2)
-#                         try:
-#                             del userdict3[user2]
-#                         except KeyError:
-#                             pass
-#                     else:
-#                         cost_sum_user1 = 15
-#                         cost_sum_user2 = 15
-#json.dump( userdict3, open("userdict3.txt", 'w'))
+userdict3 = userdict2.copy()
+cost_sum_user2 = 15
+cost_sum_user1 = 15
+for user1 in userdict2:
+    print(user1)
+    for user2 in userdict2:
+        print(user2)
+        if user1 != user2:
+            if len(userdict2[user2]) < len(userdict2[user1]):
+                if len([
+                    item for item in list(userdict2[user1].keys())
+                    if item not in list(userdict2[user2].keys())]) == (len(userdict2[user1]) - len(
+                    userdict2[user2])):
+                    for key in list(userdict2[user2].keys()):
+                        cost_sum_user2 = cost_sum_user2 + userdict2[user2][key]
+                    for key in list(userdict2[user1].keys()):
+                        cost_sum_user1 = cost_sum_user1 + userdict2[user1][key]
+                        print(str(cost_sum_user2) + "+++++" + str(cost_sum_user1))
+                    if cost_sum_user2 > cost_sum_user1:
+                        print("Deleted" + user2)
+                        try:
+                            del userdict3[user2]
+                        except KeyError:
+                            pass
+                    else:
+                        cost_sum_user1 = 15
+                        cost_sum_user2 = 15
+print("hej")
+# json.dump( userdict3, open("userdict3.txt", 'w'))
 
-userdict3 = json.load(open("userdict3.txt", 'r'))
+#userdict3 = json.load(open("userdict3.txt", 'r'))
 
-# pokemon_names_list = [list(pokemon)[0] for pokemon in pokemon_to_url]
-# pokemon_to_users_list = {}
-# for pokemon in pokemon_names_list:
-#     for user in userdict3:
-#         if pokemon in userdict3[user].keys():
-#             #pokemon_to_users_list.setdefault(pokemon, []).append({user: userdict3[user][pokemon]})
-#             if pokemon in pokemon_to_users_list.keys():
-#                 pokemon_to_users_list[pokemon].update({user: userdict3[user][pokemon]})
-#             else:
-#                 pokemon_to_users_list[pokemon] = {user: userdict3[user][pokemon]}
-#
+pokemon_names_list = [list(pokemon)[0] for pokemon in pokemon_to_url]
+pokemon_to_users_list = {}
+for pokemon in pokemon_names_list:
+    for user in userdict3:
+        if pokemon in userdict3[user].keys():
+            #pokemon_to_users_list.setdefault(pokemon, []).append({user: userdict3[user][pokemon]})
+            if pokemon in pokemon_to_users_list.keys():
+                pokemon_to_users_list[pokemon].update({user: userdict3[user][pokemon]})
+            else:
+                pokemon_to_users_list[pokemon] = {user: userdict3[user][pokemon]}
+
 # json.dump( pokemon_to_users_list, open("userdict4.txt", 'w'))
 weight = 15
 userdict4 = json.load(open("userdict4.txt", 'r'))
 userdict5 = {}
 weight_helper = 0
-helper_weight_helper = 1
+helper_weight_helper = 0
 for pokemon in userdict4:
     print(pokemon)
     userdict5[pokemon] = {}
     for user in userdict4[pokemon]:
         print(user)
         userdict5[pokemon][user] = {}
-        for L in range(1, len(userdict3[user])+1):
+        # for elm in combinations((userdict3)[user], 12):
+        #     weight_helper = weight_helper + 1
+        #     print(weight_helper)
+        for L in range(1, len(userdict3[user])):
+            print("iteracja" + str(L))
             for subset in combinations(userdict3[user], L):
+                # helper_weight_helper = helper_weight_helper + 1
+                # print("subset numer: " + str(helper_weight_helper))
                 for elm in subset:
                     weight = weight + userdict3[user][elm]
 
@@ -103,7 +110,7 @@ for pokemon in userdict4:
                     #                     weight_helper = str(weight) + "#"
                     #     userdict5[pokemon][user] = {str(weight)+: list(subset)}
                 weight = 15
-
+            #helper_weight_helper = 0
 
 for elm in userdict3:
     print(str (len(list(set(userdict3[elm])))) + " +++ " +str(len(list(userdict3[elm]))) )
