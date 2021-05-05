@@ -1,6 +1,6 @@
 import time
 import re
-import AlgoHelper
+from AlgoHelper import AlgoHelper
 from selenium.common.exceptions import ElementNotInteractableException, ElementClickInterceptedException,\
     NoSuchElementException
 
@@ -47,10 +47,11 @@ class ClickHelper:
             final_pokemon_url_list.extend(temp_pokemon_url_list)
             print(len(temp_pokemon_url_list))
             time.sleep(1)
-            if len(final_pokemon_url_list) != number_of_cards:
-                self.driver.find_element_by_xpath("//a[@aria-label='Next page']").click()
-            else:
-                break
+            # if len(final_pokemon_url_list) != number_of_cards:
+            #     self.driver.find_element_by_xpath("//a[@aria-label='Next page']").click()
+            # else:
+            #     break
+            break
         return final_pokemon_url_list
 
     def get_seller_pokemons_price_dict(self, final_pokemon_url_list):
