@@ -69,7 +69,9 @@ class ClickHelper:
         """
         seller_pokemon_price_dict = {}
         pokemon_name_to_url_list = []
-
+        #below 2 lines added only for demo purpose
+        final_pokemon_url_list = final_pokemon_url_list[15:]
+        print(final_pokemon_url_list)
         for pokemon_url in final_pokemon_url_list:
             print(seller_pokemon_price_dict)
             self.driver.get(pokemon_url)
